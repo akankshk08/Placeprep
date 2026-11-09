@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
+import AppErrorBoundary from './components/ui/AppErrorBoundary.jsx'
 import './styles/index.css'
 
 // On startup: sync .env key → localStorage so Settings modal always shows the correct key
@@ -12,6 +13,8 @@ if (envKey && !localStorage.getItem('gemini_api_key')) {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <AppErrorBoundary>
+      <App />
+    </AppErrorBoundary>
   </React.StrictMode>,
 )

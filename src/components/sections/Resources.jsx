@@ -3,6 +3,7 @@ import { Library, ExternalLink, BookOpen, Github, Star, Filter, Clock } from 'lu
 import { useApp } from '../../context/AppContext';
 import LoadingSection from '../ui/LoadingSection';
 import ErrorSection from '../ui/ErrorSection';
+import { safeUrl } from '../../lib/safeUrl';
 
 const levelColor = { Beginner: 'badge-low', Intermediate: 'badge-medium', Advanced: 'badge-high' };
 
@@ -16,7 +17,7 @@ const tabConfig = [
 
 function ResourceLink({ href, children }) {
   return (
-    <a href={href || '#'} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', display: 'block' }}>
+    <a href={safeUrl(href) || '#'} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', display: 'block' }}>
       {children}
     </a>
   );

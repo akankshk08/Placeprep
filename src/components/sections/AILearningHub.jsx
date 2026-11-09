@@ -17,6 +17,7 @@ import { fetchRaw } from '../../api/gemini';
 import { useApp, GLOBAL_SECTIONS } from '../../context/AppContext';
 import { CURATED_RESOURCES } from './YouTubeVideos';
 import { findExactVideo } from '../../data/curatedVideoIndex';
+import { safeUrl } from '../../lib/safeUrl';
 
 // ── Match a lesson to a real curated playlist, so the video (a better
 // medium for most of this) can be surfaced above the AI-generated text
@@ -263,7 +264,7 @@ function LessonCard({ data, color }) {
           Prefers an exact single video for the topic; falls back to the
           whole playlist when no specific video is indexed yet. */}
       {video && (
-        <a href={video.url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+        <a href={safeUrl(video.url)} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '18px 20px', borderRadius: 14,
             marginBottom: 16, background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.3)',
             cursor: 'pointer', transition: 'border-color 0.15s' }}

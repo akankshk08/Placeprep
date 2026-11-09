@@ -9,6 +9,7 @@ import { useApp } from '../../context/AppContext';
 import { fetchRoleDetail, fetchCategoryBatch } from '../../api/gemini';
 import LoadingSection from '../ui/LoadingSection';
 import TopicLearningPage from './TopicLearningPage';
+import { safeUrl } from '../../lib/safeUrl';
 
 // ─────────────────────────────────────────────────────────────
 // DESIGN TOKENS
@@ -110,7 +111,7 @@ function QCard({ q, index, accent='#7c3aed' }) {
           {open ? 'Hide Answer' : 'View Model Answer'}
         </button>
         {q.leetcodeLink && (
-          <a href={q.leetcodeLink} target="_blank" rel="noopener noreferrer" style={{ textDecoration:'none' }}>
+          <a href={safeUrl(q.leetcodeLink)} target="_blank" rel="noopener noreferrer" style={{ textDecoration:'none' }}>
             <button style={{ display:'flex', alignItems:'center', gap:5, padding:'7px 14px', borderRadius:8, border:'1px solid #f59e0b50', background:'#f59e0b12', color:'#f59e0b', cursor:'pointer', fontSize:'0.78rem', fontWeight:700 }}>
               <Code2 size={12}/> LeetCode
             </button>

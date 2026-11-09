@@ -12,6 +12,7 @@ import {
   fetchSubtopicResources,
   fetchSubtopicQuiz,
 } from '../../api/topicLearning';
+import { safeUrl } from '../../lib/safeUrl';
 
 // ── Progress storage helpers ───────────────────────────────────
 const STORAGE_KEY = 'pp_topic_progress';
@@ -107,7 +108,7 @@ function ResourcePanel({ company, topic, subtopic }) {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {items.map((item, i) => (
-                <a key={i} href={item.url} target="_blank" rel="noopener noreferrer"
+                <a key={i} href={safeUrl(item.url)} target="_blank" rel="noopener noreferrer"
                   style={{ display: 'flex', alignItems: 'flex-start', gap: 12, padding: '12px 14px',
                     background: 'var(--bg-secondary)', borderRadius: 10,
                     border: '1px solid var(--border-card)', textDecoration: 'none',

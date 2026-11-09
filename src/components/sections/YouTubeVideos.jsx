@@ -8,6 +8,7 @@
 // ============================================================
 import React, { useState } from 'react';
 import { Youtube, Search, ExternalLink, ListVideo } from 'lucide-react';
+import { safeUrl } from '../../lib/safeUrl';
 
 const catColors = {
   'DSA':             { text: 'var(--accent)',  bg: 'var(--accent-dim)', emoji: '🧩' },
@@ -94,7 +95,7 @@ export const CURATED_RESOURCES = [
 function ResourceCard({ item }) {
   const cat = getCat(item.category);
   return (
-    <a href={item.url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+    <a href={safeUrl(item.url)} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
       <div className="video-card" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <div style={{ height: 110, background: `linear-gradient(135deg, ${cat.bg}, var(--bg-secondary))`,
           display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', borderBottom: '1px solid var(--border-card)' }}>

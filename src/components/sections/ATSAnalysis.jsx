@@ -1,19 +1,16 @@
 import React, { useState, useRef } from 'react';
 import { ScanLine, Upload, FileText, AlertTriangle, CheckCircle, X, Loader } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
+import pdfWorkerUrl from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
 
 // ── PDF Text Extractor (pdfjs-dist v4 compatible) ─────────────
 async function extractTextFromPDF(file) {
   try {
     const arrayBuffer = await file.arrayBuffer();
 
-    // v4 uses ESM worker — use unpkg CDN with exact installed version
+    // Worker is bundled with the site, so it always matches the library version
     const pdfjsLib = await import('pdfjs-dist');
-    const version = pdfjsLib.version;
-
-    // v4+ worker is .mjs, not .js
-    pdfjsLib.GlobalWorkerOptions.workerSrc =
-      `https://unpkg.com/pdfjs-dist@${version}/build/pdf.worker.min.mjs`;
+    pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
 
     const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
     let text = '';

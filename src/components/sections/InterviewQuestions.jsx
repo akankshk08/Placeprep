@@ -5,6 +5,7 @@ import LoadingSection from '../ui/LoadingSection';
 import ErrorSection from '../ui/ErrorSection';
 import { fetchSection, fetchMoreQuestions } from '../../api/gemini';
 import BookmarkButton from '../ui/BookmarkButton';
+import { safeUrl } from '../../lib/safeUrl';
 
 const diffColor = { Easy: 'badge-low', Medium: 'badge-medium', Hard: 'badge-high' };
 const freqColor = { 'Very Common': 'badge-high', 'Common': 'badge-medium', 'Rare': 'badge-low' };
@@ -42,7 +43,7 @@ function QCard({ q, index }) {
           {open ? 'Hide Answer' : 'View Model Answer'}
         </button>
         {q.leetcodeLink && (
-          <a href={q.leetcodeLink} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+          <a href={safeUrl(q.leetcodeLink)} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
             <button style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '7px 14px', borderRadius: 8, border: '1px solid rgba(255,161,22,0.35)', background: 'rgba(255,161,22,0.08)', color: '#FFA116', cursor: 'pointer', fontSize: '0.78rem', fontWeight: 600 }}>
               <Code2 size={13} /> LeetCode
             </button>

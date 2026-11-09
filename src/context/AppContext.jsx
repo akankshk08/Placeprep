@@ -38,6 +38,15 @@ function saveSectionCache(section, data) {
   } catch (_) {}
 }
 
+const readJSON = (key, fallback) => {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch {
+    return fallback;
+  }
+};
+
 const _lastCompany = localStorage.getItem('pp_last_company') || null;
 
 const initialState = {
@@ -46,8 +55,8 @@ const initialState = {
   sectionData: _lastCompany ? loadCachedSections() : {},
   atsResult: null,
   atsLoading: false,
-  tracker: JSON.parse(localStorage.getItem('pp_tracker') || '{"completed":[],"notes":{},"streak":0,"lastActive":null}'),
-  bookmarks: JSON.parse(localStorage.getItem('pp_bookmarks') || '[]'),
+  tracker: readJSON('pp_tracker', { completed: [], notes: {}, streak: 0, lastActive: null }),
+  bookmarks: readJSON('pp_bookmarks', []),
   settingsOpen: false,
   sidebarOpen: false,
   aiLearnPendingTopic: null,

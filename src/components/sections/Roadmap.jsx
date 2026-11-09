@@ -3,6 +3,7 @@ import { Map, Calendar, CheckCircle, ChevronDown, ChevronUp, Youtube, ExternalLi
 import { useApp } from '../../context/AppContext';
 import LoadingSection from '../ui/LoadingSection';
 import ErrorSection from '../ui/ErrorSection';
+import { safeUrl } from '../../lib/safeUrl';
 
 const phaseColors = ['var(--accent)', 'var(--teal)', 'var(--orange)', 'var(--pink)', 'var(--yellow)', 'var(--green)'];
 
@@ -46,7 +47,7 @@ function ResourceLinks({ phaseNum }) {
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
         {links.map((r, i) => (
-          <a key={i} href={r.url} target="_blank" rel="noopener noreferrer"
+          <a key={i} href={safeUrl(r.url)} target="_blank" rel="noopener noreferrer"
             style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '8px 12px', borderRadius: 8,
               background: 'var(--bg-secondary)', border: '1px solid var(--border-card)', textDecoration: 'none' }}>
             <Youtube size={14} color="#FF0000" />
