@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@google/genai": "^2.8.0",
     "lucide-react": "^0.460.0",
     "pdfjs-dist": "^4.9.155",
     "react": "^18.3.1",

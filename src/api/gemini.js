@@ -85,8 +85,10 @@ export const testApiKey = async (key) => {
 // ── Request Queue — 600ms gap prevents 429 bursts ────────────
 let _queue = Promise.resolve();
 const enqueue = (fn) => {
-  _queue = _queue.then(() => new Promise(res => setTimeout(res, 600))).then(fn);
-  return _queue;
+  const run = _queue.then(() => new Promise(res => setTimeout(res, 600))).then(fn);
+  // Keep the queue alive after a failure so later requests still run
+  _queue = run.catch(() => {});
+  return run;
 };
 
 // ── Main caller with model fallback ──────────────────────────
